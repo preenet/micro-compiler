@@ -299,6 +299,16 @@ public class LL1PredictGenerator {
 		return retVal;
 	}
 	
+	
+	public TermSet getFirstSet(Symbol s) {
+		TermSet retVal = new TermSet();
+		return retVal;
+	}
+	
+	public TermSet getFollowSet(Symbol s) {
+		TermSet retVal = new TermSet();
+		return retVal;
+	}
 
 	private int indexOf(Symbol s) {
 		for (int i = 0; i < firstSet.size(); i++)
