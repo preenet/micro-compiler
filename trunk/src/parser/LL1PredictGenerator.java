@@ -284,7 +284,8 @@ public class LL1PredictGenerator {
 	public Vector<TermSet> getFirstSet() {
 		Vector<TermSet> retVal = new Vector<TermSet>();
 		for(int i = 0; i < firstSet.size(); i++)
-			if(!firstSet.elementAt(i).getSymbol().toString().endsWith("tail>"))
+			if(!firstSet.elementAt(i).getSymbol().toString().endsWith("tail>") 
+					&& firstSet.elementAt(i).getSymbol().getType().equals("n"))
 				retVal.add(firstSet.elementAt(i));
 		return retVal;
 	}
@@ -292,7 +293,8 @@ public class LL1PredictGenerator {
 	public Vector<TermSet> getFollowSet() {
 		Vector<TermSet> retVal = new Vector<TermSet>();
 		for(int i = 0; i < followSet.size(); i++)
-			if(!followSet.elementAt(i).getSymbol().toString().endsWith("tail>"))
+			if(!followSet.elementAt(i).getSymbol().toString().endsWith("tail>")
+					&& followSet.elementAt(i).getSymbol().getType().equals("n"))
 				retVal.add(followSet.elementAt(i));
 		return retVal;
 	}
