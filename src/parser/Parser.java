@@ -15,7 +15,6 @@ import semantic.ExprRecord;
 import semantic.ExprType;
 import semantic.SemanticRoutine;
 import semantic.OpRecord;
-import grammar.TerminalSet;
 
 public class Parser {
 	private SemanticRoutine sr;
@@ -322,7 +321,7 @@ public class Parser {
 	 * It checks the validity of input and if it is invalid calls scanner repeatedly to get next token
 	 * while next token is not equal to one of the acceptable tokens. This way we skip as many tokens as necessary.
 	 */
-	private void checkInput(TerminalSet validSet, TerminalSet followSet, TerminalSet header) {
+	private void checkInput(TermSet validSet, TermSet followSet, TermSet header) {
 		
 	}
 	
