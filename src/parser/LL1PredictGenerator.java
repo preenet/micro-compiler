@@ -299,12 +299,23 @@ public class LL1PredictGenerator {
 		return retVal;
 	}
 	
-	
-	public TermSet getFirstSet(Symbol s) {
+	/**
+	 * this routine is use for error recovery at recursive descent parser.
+	 * ValidSet(A) = First(A), if lambda is member of First (A)
+	 * ValidSet(A) = (First(A) union Follow (A)) – lambda, if lambda is member of First (A).
+	 * @param s
+	 * @return
+	 */
+	public TermSet getValidSet(Symbol s) {
 		TermSet retVal = new TermSet();
 		return retVal;
 	}
 	
+	/**
+	 * this routine is use for error recovery at recursive descent parser.
+	 * @param s
+	 * @return
+	 */
 	public TermSet getFollowSet(Symbol s) {
 		TermSet retVal = new TermSet();
 		return retVal;
