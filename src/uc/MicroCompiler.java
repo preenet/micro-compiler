@@ -12,8 +12,11 @@ package uc;
 
 import java.io.IOException;
 import parser.Parser;
+import parser.GrammarAnalyzer;
+import parser.LL1PredictGenerator;
 import grammar.Grammar;
 import scanner.Scanner;
+
 
 public class MicroCompiler {
 	
@@ -31,6 +34,8 @@ public class MicroCompiler {
 		Scanner ms;
 		Parser mp;
 		Grammar mg;
+		GrammarAnalyzer ga;
+		LL1PredictGenerator lpg;
 
 
 		// validate input argument
@@ -47,7 +52,11 @@ public class MicroCompiler {
 		System.out.println("\nDone scanning, Tokens after scanned:");
 		ms.dumpTokens();
 		
+	    ga = new GrammarAnalyzer("LL1MicroGrammar.md");
+		lpg = new LL1PredictGenerator(ga.getGrammar());
 		
+		System.out.println("First Set:\n " + lpg.getFirstSet());
+		System.out.println("Follow Set:\n " + lpg.getFollowSet());
 
 
 		System.out.println("\n*******Recursive Descent Parsing****************");
