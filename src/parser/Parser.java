@@ -197,7 +197,12 @@ public class Parser {
 			prodNums.add(17);
 		else
 			prodNums.add(16);
-	
+		
+		// check valid input
+		checkInput(lpg.getValidSet(new Symbol("<factor>")), 
+				lpg.getFollowSet(new Symbol("<factor>")),
+				lpg.getHeaderSet(new Symbol("<factor>"), new Symbol("EndSym")));
+		
 		primary(leftOp);
 		TokenType t = ms.nextToken();
 		
@@ -349,6 +354,7 @@ public class Parser {
 	 * while next token is not equal to one of the acceptable tokens. This way we skip as many tokens as necessary.
 	 */
 	private void checkInput(TermSet validSet, TermSet followSet, TermSet header) {
+		System.out.println("Check Input:");
 		System.out.print("ValidSet : " + validSet);
 		System.out.print("FollowSet: " + followSet);
 		System.out.println("HeaderSet: " + header);
