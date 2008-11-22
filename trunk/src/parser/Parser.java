@@ -370,8 +370,6 @@ public class Parser {
 			syntaxError(t);
 	}
 	
-
-	
 	private boolean match(TokenType t) {
 		sr.addAction("match" + "(" + t + ")", ms.getRemainToken());
 		System.out.println("> " + t + " matched " + ms.getTokens().elementAt(ms.index).getType());
