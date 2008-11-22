@@ -50,9 +50,11 @@ public class Parser {
 		prodNums.add(1);
 		sr.addAction("Semantic Action: start()", ms.getRemainToken());
 		sr.start();
+		
 		checkInput(lpg.getValidSet(new Symbol("<program>")), 
 				lpg.getFollowSet(new Symbol("<program>")),
 				lpg.getHeaderSet(new Symbol("<program>"), new Symbol("EofSym")));
+		
 		match(TokenType.BeginSym);
 		statementList();
 		match(TokenType.EndSym);
@@ -61,6 +63,11 @@ public class Parser {
 	private void statementList() {
 		sr.addAction("Call statementList()", ms.getRemainToken());
 		prodNums.add(2);
+		
+		checkInput(lpg.getValidSet(new Symbol("<stmt list>")), 
+				lpg.getFollowSet(new Symbol("<stmt list>")),
+				lpg.getHeaderSet(new Symbol("<stmt list>"), new Symbol("EofSym")));
+		
 		statement();
 		while (true) {
 			switch (ms.nextToken()) {
