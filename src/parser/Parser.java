@@ -379,8 +379,9 @@ public class Parser {
 			if(TokenType.EofSym.equals(t) || TokenType.Semicolon.equals(t)) {
 				System.out.println("matching error:");
 				ms.index++;
-				while(!ms.nextToken().equals(t))
+				while(!ms.nextToken().equals(t)) {
 					ms.index++;
+				}
 				System.out.println("Found the EOFSYM or SEMICOLON");
 			}
 			return false;
