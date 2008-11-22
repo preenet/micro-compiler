@@ -420,7 +420,7 @@ public class Parser {
 		
 		TokenType t = ms.nextToken();
 		if(validSet.hasMember(new Symbol(t.toString()))) {
-			System.out.println("ValidSet has member : " + ms.nextToken());
+			System.out.println("Valid token: " + ms.nextToken());
 			System.out.println();
 			return;
 		}
