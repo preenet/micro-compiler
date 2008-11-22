@@ -19,7 +19,7 @@ mkbindir:
 	mkdir -p bin
 
 compile : mkbindir $(CLASSES)
-		@echo Micro Compiler (Non-Universal) has been compiled.
+		@echo Micro Compiler Non Universal has been compiled.
 
 clean :
 	rm -f bin/uc/*.class

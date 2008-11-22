@@ -308,8 +308,6 @@ public class LL1PredictGenerator {
 	
 	/**
 	 * this routine is use for error recovery at recursive descent parser.
-	 * ValidSet(A) = First(A), if lambda is member of First (A)
-	 * ValidSet(A) = (First(A) union Follow (A)) – lambda, if lambda is member of First (A).
 	 * @param s
 	 * @return TermSet
 	 */
