@@ -57,14 +57,14 @@ public class Grammar {
 	 * construct the Micro Grammar from the above table.
 	 */
 	private void initMicroGrammar() {
-		prods.add(new Production(1, "<program>", "begin <stmt list> end", false));
+		prods.add(new Production(1, "<program>", "BeginSym <stmt list> EndSym", false));
 		prods.add(new Production(2, "<stmt list>", "<statement>", true));
 		prods.add(new Production(3, "<stmt list>", "<statement> <stmt list>", false));
-		prods.add(new Production(4, "<statement>", "<ident> <assignment> <expression>;", false));
-		prods.add(new Production(5, "<statement>", "read(<id list>);", false));
-		prods.add(new Production(6, "<statement>", "write(<expr list>);", false));
+		prods.add(new Production(4, "<statement>", "<ident> <assignment> <expression> SemiColon", false));
+		prods.add(new Production(5, "<statement>", "ReadSym (<id list>)SemiColon", false));
+		prods.add(new Production(6, "<statement>", "WriteSym (<expr list>)SemiColon", false));
 		prods.add(new Production(7, "<id list>", "<ident>", true));
-		prods.add(new Production(8, "<id list>", "<ident>, <id list>", false));
+		prods.add(new Production(8, "<id list>", "<ident> Comma <id list>", false));
 		prods.add(new Production(9, "<id list>", "", false));
 		prods.add(new Production(10, "<expr list>", "<expression>", true));
 		prods.add(new Production(11, "<expr list>", "<expression>, <expr list>", false));
@@ -81,7 +81,7 @@ public class Grammar {
 		prods.add(new Production(22, "<add op>", "PlusOp", false));
 		prods.add(new Production(23, "<add op>", "MinusOp", false));
 		prods.add(new Production(24, "<mul op>", "MultiOp", false));
-		prods.add(new Production(25, "<system goal>", "<program> EoF", false));
+		prods.add(new Production(25, "<system goal>", "<program> EofSym", false));
 	}
 
 	/**
