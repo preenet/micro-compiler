@@ -46,9 +46,6 @@ public class Parser {
 	}
 
 	private void program() {
-		sr.addAction("Call program()", ms.getRemainToken());
-		prodNums.add(1);
-		sr.addAction("Semantic Action: start()", ms.getRemainToken());
 		sr.start();
 		
 		// check valid input
@@ -56,19 +53,23 @@ public class Parser {
 				lpg.getFollowSet(new Symbol("<program>")),
 				lpg.getHeaderSet(new Symbol("<program>"), new Symbol("EofSym")));
 		
+		sr.addAction("Call program()", ms.getRemainToken());
+		prodNums.add(1);
+		sr.addAction("Semantic Action: start()", ms.getRemainToken());
+		
 		match(TokenType.BeginSym);
 		statementList();
 		match(TokenType.EndSym);
 	}
 
 	private void statementList() {
-		sr.addAction("Call statementList()", ms.getRemainToken());
-		prodNums.add(2);
-		
 		// check valid input
 		checkInput(lpg.getValidSet(new Symbol("<stmt list>")), 
 				lpg.getFollowSet(new Symbol("<stmt list>")),
 				lpg.getHeaderSet(new Symbol("<stmt list>"), new Symbol("EofSym")));
+		
+		sr.addAction("Call statementList()", ms.getRemainToken());
+		prodNums.add(2);
 		
 		statement();
 		while (true) {
@@ -88,13 +89,14 @@ public class Parser {
 		ExprRecord identifier = new ExprRecord();
 		ExprRecord expr = new ExprRecord();
 		
-		sr.addAction("Call statement()", ms.getRemainToken());
 		TokenType t = ms.nextToken();
 		
 		// check valid input
 		checkInput(lpg.getValidSet(new Symbol("<statement>")), 
 				lpg.getFollowSet(new Symbol("<statement>")),
 				lpg.getHeaderSet(new Symbol("<statement>"), new Symbol("EofSym")));
+		
+		sr.addAction("Call statement()", ms.getRemainToken());
 		
 		switch (t) {
 			case Id:
@@ -136,13 +138,15 @@ public class Parser {
 	 * have to same property
 	 */
 	private void assignment() {
-		sr.addAction("Call assignment()", ms.getRemainToken());
+	
 		TokenType t = ms.nextToken();
 		
 		// check valid input
 		checkInput(lpg.getValidSet(new Symbol("<assignment>")), 
 				lpg.getFollowSet(new Symbol("<assignment>")),
 				lpg.getHeaderSet(new Symbol("<assignment>"), new Symbol("EndSym")));
+		
+		sr.addAction("Call assignment()", ms.getRemainToken());
 		
 		switch (t) {
 			case AssignOp:
@@ -165,17 +169,17 @@ public class Parser {
 		ExprRecord rightOp = new ExprRecord();
 		OpRecord oper = new OpRecord();
 		
-		sr.addAction("Call expression()[" + exprCount + "]", ms.getRemainToken());
-		if(ms.peekToken().equals(TokenType.PlusOp) || ms.peekToken().equals(TokenType.MinusOp))
-			prodNums.add(15);
-		else
-			prodNums.add(14);
-
 		// check valid input
 		checkInput(lpg.getValidSet(new Symbol("<expression>")), 
 				lpg.getFollowSet(new Symbol("<expression>")),
 				lpg.getHeaderSet(new Symbol("<expression>"), new Symbol("EndSym")));
 		
+		
+		sr.addAction("Call expression()[" + exprCount + "]", ms.getRemainToken());
+		if(ms.peekToken().equals(TokenType.PlusOp) || ms.peekToken().equals(TokenType.MinusOp))
+			prodNums.add(15);
+		else
+			prodNums.add(14);
 		
 		factor(leftOp);
 		TokenType t = ms.nextToken();
@@ -226,13 +230,15 @@ public class Parser {
 	}
 
 	private void primary(ExprRecord result) {
-		sr.addAction("Call primary()", ms.getRemainToken());
+		
 		TokenType t = ms.nextToken();
 	
 		// check valid input
 		checkInput(lpg.getValidSet(new Symbol("<primary>")), 
 				lpg.getFollowSet(new Symbol("<primary>")),
 				lpg.getHeaderSet(new Symbol("<primary>"), new Symbol("EndSym")));
+		
+		sr.addAction("Call primary()", ms.getRemainToken());
 	
 		switch (t) {
 			case LPalen:
@@ -260,15 +266,15 @@ public class Parser {
 	private void idList() {
 		ExprRecord identifier = new ExprRecord(ExprType.IdExpr);
 		
-		if(ms.peekToken().equals(TokenType.Comma))
-			prodNums.add(8);
-		else 
-			prodNums.add(7);
-		
 		// check valid input
 		checkInput(lpg.getValidSet(new Symbol("<id list>")), 
 				lpg.getFollowSet(new Symbol("<id list>")),
 				lpg.getHeaderSet(new Symbol("<id list>"), new Symbol("EndSym")));
+		
+		if(ms.peekToken().equals(TokenType.Comma))
+			prodNums.add(8);
+		else 
+			prodNums.add(7);
 
 		ident(identifier);
 		sr.addAction("Semantic Action: readId()", ms.getRemainToken());
@@ -377,7 +383,7 @@ public class Parser {
 			syntaxError(t);
 			
 			if(TokenType.EofSym.equals(t) || TokenType.Semicolon.equals(t)) {
-				System.out.println("matching error:");
+
 				ms.index++;
 				while(!ms.nextToken().equals(t)) {
 					ms.index++;
