@@ -138,6 +138,12 @@ public class Parser {
 	private void assignment() {
 		sr.addAction("Call assignment()", ms.getRemainToken());
 		TokenType t = ms.nextToken();
+		
+		// check valid input
+		checkInput(lpg.getValidSet(new Symbol("<assignment>")), 
+				lpg.getFollowSet(new Symbol("<assignment>")),
+				lpg.getHeaderSet(new Symbol("<assignment>"), new Symbol("EndSym")));
+		
 		switch (t) {
 			case AssignOp:
 				prodNums.add(12);
@@ -369,11 +375,13 @@ public class Parser {
 		} 
 		else if (!ms.getTokens().elementAt(ms.index).getType().equals(t)) {
 			syntaxError(t);
+			
 			if(TokenType.EofSym.equals(t) || TokenType.Semicolon.equals(t)) {
+				System.out.println("matching error:");
 				ms.index++;
-				while(!ms.nextToken().equals(t)) {
+				while(!ms.nextToken().equals(t))
 					ms.index++;
-				}
+				System.out.println("Found the EOFSYM or SEMICOLON");
 			}
 			return false;
 		} 
