@@ -1,5 +1,5 @@
-<system goal>	->	<program> $
-<program>	->	begin <stmt list> end
+<system goal>	->	<program> EofSym
+<program>	->	BeginSym <stmt list> EndSym
 <stmt list>	->	<statement> <statement tail>
 <statement tail>	->	<stmt list>
 <statement tail>	->	lambda

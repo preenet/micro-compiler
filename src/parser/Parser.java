@@ -15,18 +15,21 @@ import semantic.ExprRecord;
 import semantic.ExprType;
 import semantic.SemanticRoutine;
 import semantic.OpRecord;
+import ll1grammar.*;
 
 public class Parser {
 	private SemanticRoutine sr;
 	private Scanner ms;
 	private Vector<Integer> prodNums; // storage of applied production
 	private int exprCount; // display the number of time that call expression function.
+	private LL1PredictGenerator lpg;
 
-	public Parser(Scanner ms) {
+	public Parser(Scanner ms, LL1PredictGenerator lpg) {
 		this.ms = ms;
 		prodNums = new Vector<Integer> ();
 		exprCount = 0;
 		sr = new SemanticRoutine(ms);
+		this.lpg = lpg;
 	}
 
 	public void parse() {
@@ -47,6 +50,9 @@ public class Parser {
 		prodNums.add(1);
 		sr.addAction("Semantic Action: start()", ms.getRemainToken());
 		sr.start();
+		checkInput(lpg.getValidSet(new Symbol("<program>")), 
+				lpg.getFollowSet(new Symbol("<program>")),
+				lpg.getHeaderSet(new Symbol("<program>"), new Symbol("EofSym")));
 		match(TokenType.BeginSym);
 		statementList();
 		match(TokenType.EndSym);
@@ -322,7 +328,25 @@ public class Parser {
 	 * while next token is not equal to one of the acceptable tokens. This way we skip as many tokens as necessary.
 	 */
 	private void checkInput(TermSet validSet, TermSet followSet, TermSet header) {
+		System.out.print("ValidSet : " + validSet);
+		System.out.print("FollowSet: " + followSet);
+		System.out.println("HeaderSet: " + header);
 		
+		TokenType t = ms.nextToken();
+		if(validSet.hasMember(new Symbol(t.toString()))) {
+			System.out.println("ValidSet has member : " + ms.nextToken());
+			return;
+		}
+		else
+			syntaxError(t);
+		
+		// union of the three sets.
+		validSet.unionTermset(followSet);
+		validSet.unionTermset(header);
+		
+		while(!validSet.hasMember(new Symbol(ms.nextToken().toString()))) {
+			System.out.println("Skipped token: " + ms.nextToken());
+		}
 	}
 	
 	public Vector<Integer> getProductionNums() {
