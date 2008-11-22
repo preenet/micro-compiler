@@ -60,7 +60,7 @@ public class MicroCompiler {
 
 
 		System.out.println("\n*******Recursive Descent Parsing****************");
-		mp = new Parser(ms);
+		mp = new Parser(ms, lpg);
 		mp.parse();
 
 		System.out.println("\n********Demonstrate of the parser*************");

@@ -281,6 +281,10 @@ public class LL1PredictGenerator {
 		return retVal;
 	}
 	
+	/**
+	 * this routine is use for error recovery at recursive descent parser.
+	 * @return
+	 */
 	public Vector<TermSet> getFirstSet() {
 		Vector<TermSet> retVal = new Vector<TermSet>();
 		for(int i = 0; i < firstSet.size(); i++)
@@ -290,6 +294,10 @@ public class LL1PredictGenerator {
 		return retVal;
 	}
 	
+	/**
+	 * this routine is use for error recovery at recursive descent parser.
+	 * @return
+	 */
 	public Vector<TermSet> getFollowSet() {
 		Vector<TermSet> retVal = new Vector<TermSet>();
 		for(int i = 0; i < followSet.size(); i++)
@@ -307,7 +315,12 @@ public class LL1PredictGenerator {
 	 * @return
 	 */
 	public TermSet getValidSet(Symbol s) {
-		TermSet retVal = new TermSet();
+		TermSet retVal = null;
+		for(int i = 0; i < firstSet.size(); i++)
+			if(!firstSet.elementAt(i).getSymbol().toString().endsWith("tail>")
+					&& firstSet.elementAt(i).getSymbol().getType().equals("n")
+					&& firstSet.elementAt(i).getSymbol().equals(s))
+				retVal = firstSet.elementAt(i);
 		return retVal;
 	}
 	
@@ -317,7 +330,18 @@ public class LL1PredictGenerator {
 	 * @return
 	 */
 	public TermSet getFollowSet(Symbol s) {
-		TermSet retVal = new TermSet();
+		TermSet retVal = null;
+		for(int i=0; i<followSet.size(); i++) {
+			if(followSet.elementAt(i).getSymbol().equals(s)
+					&& !followSet.elementAt(i).getSymbol().toString().endsWith("tail>"))
+				retVal =  followSet.elementAt(i);
+		}
+		return retVal;
+	}
+	
+	public TermSet getHeaderSet(Symbol s, Symbol t) {
+		TermSet retVal = new TermSet(s);
+		retVal.setSetOf(t);
 		return retVal;
 	}
 
