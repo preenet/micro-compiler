@@ -4,8 +4,8 @@
 <statement tail>	->	<stmt list>
 <statement tail>	->	lambda
 <statement>	->	<ident> := <expression> ;
-<statement> ->	read ( <id list> ) ;
-<statement>	->	write ( <expr list> ) ;
+<statement> ->	ReadSym ( <id list> ) ;
+<statement>	->	WriteSym ( <expr list> ) ;
 <id list>	->	<ident> <id tail>
 <id tail>	->	, <id list>
 <id tail>	->	lambda
