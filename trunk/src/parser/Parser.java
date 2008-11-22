@@ -222,6 +222,12 @@ public class Parser {
 	private void primary(ExprRecord result) {
 		sr.addAction("Call primary()", ms.getRemainToken());
 		TokenType t = ms.nextToken();
+	
+		// check valid input
+		checkInput(lpg.getValidSet(new Symbol("<primary>")), 
+				lpg.getFollowSet(new Symbol("<primary>")),
+				lpg.getHeaderSet(new Symbol("<primary>"), new Symbol("EndSym")));
+	
 		switch (t) {
 			case LPalen:
 				prodNums.add(18);
@@ -245,9 +251,64 @@ public class Parser {
 		}
 	}
 	
+	private void idList() {
+		ExprRecord identifier = new ExprRecord(ExprType.IdExpr);
+		
+		if(ms.peekToken().equals(TokenType.Comma))
+			prodNums.add(8);
+		else 
+			prodNums.add(7);
+		
+		// check valid input
+		checkInput(lpg.getValidSet(new Symbol("<id list>")), 
+				lpg.getFollowSet(new Symbol("<id list>")),
+				lpg.getHeaderSet(new Symbol("<id list>"), new Symbol("EndSym")));
+
+		ident(identifier);
+		sr.addAction("Semantic Action: readId()", ms.getRemainToken());
+		sr.readId(identifier);
+		
+		while (ms.nextToken().equals(TokenType.Comma)) {
+			prodNums.add(8);
+			match(TokenType.Comma);
+			ident(identifier);
+			sr.addAction("Semantic Action: readId()", ms.getRemainToken());
+		}
+		prodNums.add(9);
+	}
+
+	private void exprList() {
+		ExprRecord expr = new ExprRecord(ExprType.TempExpr);
+		
+		// check valid input
+		checkInput(lpg.getValidSet(new Symbol("<expr list>")), 
+				lpg.getFollowSet(new Symbol("<expr list>")),
+				lpg.getHeaderSet(new Symbol("<expr list>"), new Symbol("EndSym")));
+		
+		expression(expr);
+		sr.addAction("Semantic Action: writeExpr()", ms.getRemainToken());
+		sr.writeExpr(expr);
+		if(ms.peekToken().equals(TokenType.Comma))
+			prodNums.add(11);
+		else 
+			prodNums.add(10);
+		while (ms.nextToken().equals(TokenType.Comma)) {
+			match(TokenType.Comma);
+			expression(expr);
+			sr.addAction("Semantic Action: writeExpr()", ms.getRemainToken());
+			sr.writeExpr(expr);
+		}
+	}
+	
 	private void ident(ExprRecord result) {
 		sr.addAction("Call ident()", ms.getRemainToken());
 		prodNums.add(21);
+		
+		// check valid input
+		checkInput(lpg.getValidSet(new Symbol("<ident>")), 
+				lpg.getFollowSet(new Symbol("<ident>")),
+				lpg.getHeaderSet(new Symbol("<ident>"), new Symbol("EndSym")));
+		
 		match(TokenType.Id);
 		sr.addAction("Semantic Action: processId()", ms.getRemainToken());
 		sr.processId(result);
@@ -256,6 +317,12 @@ public class Parser {
 	private void addOp(OpRecord oper) {
 		sr.addAction("Call addOp()", ms.getRemainToken());
 		TokenType t = ms.nextToken();
+		
+		// check valid input
+		checkInput(lpg.getValidSet(new Symbol("<add op>")), 
+				lpg.getFollowSet(new Symbol("<add op>")),
+				lpg.getHeaderSet(new Symbol("<add op>"), new Symbol("EndSym")));
+		
 		if (t.equals(TokenType.PlusOp)) {
 			prodNums.add(22);
 			match(t);
@@ -275,6 +342,12 @@ public class Parser {
 	private void mulOp(OpRecord oper) {
 		sr.addAction("Call MulOp()", ms.getRemainToken());
 		TokenType t = ms.nextToken();
+		
+		// check valid input
+		checkInput(lpg.getValidSet(new Symbol("<mul op>")), 
+				lpg.getFollowSet(new Symbol("<mul op>")),
+				lpg.getHeaderSet(new Symbol("<mul op>"), new Symbol("EndSym")));
+		
 		if (t.equals(TokenType.MultiOp)) {
 			prodNums.add(24);
 			match(t);
@@ -285,43 +358,7 @@ public class Parser {
 			syntaxError(t);
 	}
 	
-	private void idList() {
-		ExprRecord identifier = new ExprRecord(ExprType.IdExpr);
-		
-		if(ms.peekToken().equals(TokenType.Comma))
-			prodNums.add(8);
-		else 
-			prodNums.add(7);
-		ident(identifier);
-		sr.addAction("Semantic Action: readId()", ms.getRemainToken());
-		sr.readId(identifier);
-		
-		while (ms.nextToken().equals(TokenType.Comma)) {
-			prodNums.add(8);
-			match(TokenType.Comma);
-			ident(identifier);
-			sr.addAction("Semantic Action: readId()", ms.getRemainToken());
-		}
-		prodNums.add(9);
-	}
 
-	private void exprList() {
-		ExprRecord expr = new ExprRecord(ExprType.TempExpr);
-		
-		expression(expr);
-		sr.addAction("Semantic Action: writeExpr()", ms.getRemainToken());
-		sr.writeExpr(expr);
-		if(ms.peekToken().equals(TokenType.Comma))
-			prodNums.add(11);
-		else 
-			prodNums.add(10);
-		while (ms.nextToken().equals(TokenType.Comma)) {
-			match(TokenType.Comma);
-			expression(expr);
-			sr.addAction("Semantic Action: writeExpr()", ms.getRemainToken());
-			sr.writeExpr(expr);
-		}
-	}
 	
 	private boolean match(TokenType t) {
 		sr.addAction("match" + "(" + t + ")", ms.getRemainToken());
