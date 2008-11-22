@@ -198,7 +198,7 @@ public class SemanticRoutine {
 	
 	public void dumpGeneratedCode() {
 		System.out.println();
-		System.out.println("Generated Code:");
+		System.out.println("Micro Generated Code:");
 		for(int i=0; i<genAct.size(); i++) {
 			if(!genAct.elementAt(i).hasCode())
 			System.out.println(genAct.elementAt(i).getGeneratedCode());
