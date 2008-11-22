@@ -51,6 +51,7 @@ public class Parser {
 		sr.addAction("Semantic Action: start()", ms.getRemainToken());
 		sr.start();
 		
+		// check valid input
 		checkInput(lpg.getValidSet(new Symbol("<program>")), 
 				lpg.getFollowSet(new Symbol("<program>")),
 				lpg.getHeaderSet(new Symbol("<program>"), new Symbol("EofSym")));
@@ -64,6 +65,7 @@ public class Parser {
 		sr.addAction("Call statementList()", ms.getRemainToken());
 		prodNums.add(2);
 		
+		// check valid input
 		checkInput(lpg.getValidSet(new Symbol("<stmt list>")), 
 				lpg.getFollowSet(new Symbol("<stmt list>")),
 				lpg.getHeaderSet(new Symbol("<stmt list>"), new Symbol("EofSym")));
@@ -88,6 +90,12 @@ public class Parser {
 		
 		sr.addAction("Call statement()", ms.getRemainToken());
 		TokenType t = ms.nextToken();
+		
+		// check valid input
+		checkInput(lpg.getValidSet(new Symbol("<statement>")), 
+				lpg.getFollowSet(new Symbol("<statement>")),
+				lpg.getHeaderSet(new Symbol("<statement>"), new Symbol("EofSym")));
+		
 		switch (t) {
 			case Id:
 				prodNums.add(4);
@@ -157,6 +165,12 @@ public class Parser {
 		else
 			prodNums.add(14);
 
+		// check valid input
+		checkInput(lpg.getValidSet(new Symbol("<expression>")), 
+				lpg.getFollowSet(new Symbol("<expression>")),
+				lpg.getHeaderSet(new Symbol("<expression>"), new Symbol("EndSym")));
+		
+		
 		factor(leftOp);
 		TokenType t = ms.nextToken();
 		
