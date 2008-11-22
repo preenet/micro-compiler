@@ -52,7 +52,7 @@ How to compile and run:
 1) To extract the program type 'unrar x csc5640-a11.rar'
 2) To compiler the program type 'make'
 3) To run the program type 'java uc.MicroCompiler [micro_program.m]'
-4) Make sure the input files such as TransitionTable.md, MicroGrammar.md and the target source file (*.m)
+4) Make sure the input files LL1MicroGrammar.md and the target source file (*.m)
    are in the same folder as described as above structure.
 
 ---------------------------  
@@ -63,6 +63,35 @@ Eclipse IDE with jre 1.6.0_07, Vista 32-bits and Ubuntu OS
 ------------------------------------------
 Example of program in running(program1.m):
 ------------------------------------------
+pree@Heroin:~/Public/csc5640-a11$ ls
+bin  doc  LL1MicroGrammar.md  makefile  program1.m  program2.m  README.txt  src
+pree@Heroin:~/Public/csc5640-a11$ make
+mkdir -p bin
+javac -classpath src -d bin -Xlint src/uc/ExternalFile.java
+javac -classpath src -d bin -Xlint src/uc/MicroCompiler.java
+javac -classpath src -d bin -Xlint src/grammar/Grammar.java
+javac -classpath src -d bin -Xlint src/grammar/Production.java
+javac -classpath src -d bin -Xlint src/parser/GrammarAnalyzer.java
+javac -classpath src -d bin -Xlint src/parser/LL1PredictGenerator.java
+javac -classpath src -d bin -Xlint src/parser/Parser.java
+javac -classpath src -d bin -Xlint src/parser/TermSet.java
+javac -classpath src -d bin -Xlint src/scanner/Scanner.java
+javac -classpath src -d bin -Xlint src/scanner/TokenRecord.java
+javac -classpath src -d bin -Xlint src/scanner/TokenType.java
+javac -classpath src -d bin -Xlint src/semantic/ExprRecord.java
+javac -classpath src -d bin -Xlint src/semantic/ExprType.java
+javac -classpath src -d bin -Xlint src/semantic/OpRecord.java
+javac -classpath src -d bin -Xlint src/semantic/SemanticRoutine.java
+javac -classpath src -d bin -Xlint src/ll1grammar/Grammar.java
+javac -classpath src -d bin -Xlint src/ll1grammar/NonTerminal.java
+javac -classpath src -d bin -Xlint src/ll1grammar/Production.java
+javac -classpath src -d bin -Xlint src/ll1grammar/Symbol.java
+javac -classpath src -d bin -Xlint src/ll1grammar/Terminal.java
+Micro Compiler Non Universal has been compiled.
+pree@Heroin:~/Public/csc5640-a11$ cp *.md bin
+pree@Heroin:~/Public/csc5640-a11$ cp *.m bin
+pree@Heroin:~/Public/csc5640-a11$ cd bin
+pree@Heroin:~/Public/csc5640-a11/bin$ java uc.MicroCompiler program1.m
 Scanning:
 Tokens after scanned:
 [Id BeginSym Id PlusOp AssignOp Id PlusOp IntLiteral MultiOp Id Id Semicolon 
@@ -350,4 +379,3 @@ Micro Generated Code:
 [ Halt ] 
 
 Done compilng!
-
