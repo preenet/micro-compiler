@@ -22,22 +22,22 @@ public class ExprRecord {
 	}
 
 	public String getName() {
-		return this.name;
+		return name;
 	}
 
 	public int getVal() {
-		return this.val;
+		return val;
 	}
 
 	public void setName(String s) {
-		this.name = s;
+		name = s;
 	}
 
 	public void setVal(int v) {
-		this.val = v;
+		val = v;
 	}
 	
 	public String toString() {
-		return this.kind.toString();
+		return kind.toString();
 	}
 }// end class ExprRecord
