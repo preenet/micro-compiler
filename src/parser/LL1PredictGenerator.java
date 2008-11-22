@@ -8,7 +8,6 @@
 
 package parser;
 import ll1grammar.*;
-import java.io.*;
 import java.util.*;
 
 
@@ -312,7 +311,7 @@ public class LL1PredictGenerator {
 	 * ValidSet(A) = First(A), if lambda is member of First (A)
 	 * ValidSet(A) = (First(A) union Follow (A)) – lambda, if lambda is member of First (A).
 	 * @param s
-	 * @return
+	 * @return TermSet
 	 */
 	public TermSet getValidSet(Symbol s) {
 		TermSet retVal = null;
@@ -327,7 +326,7 @@ public class LL1PredictGenerator {
 	/**
 	 * this routine is use for error recovery at recursive descent parser.
 	 * @param s
-	 * @return
+	 * @return TermSet
 	 */
 	public TermSet getFollowSet(Symbol s) {
 		TermSet retVal = null;
@@ -339,6 +338,12 @@ public class LL1PredictGenerator {
 		return retVal;
 	}
 	
+	/**
+	 * this routine is use for error recovery at recursive descent parser.
+	 * @param s
+	 * @param t
+	 * @return TermSet
+	 */
 	public TermSet getHeaderSet(Symbol s, Symbol t) {
 		TermSet retVal = new TermSet(s);
 		retVal.setSetOf(t);

@@ -60,9 +60,8 @@ public class Grammar {
 	}
 	
 	public void dumpGrammar() {
-		for(int i=0; i<prods.size(); i++) {
+		for(int i=0; i<prods.size(); i++)
 			System.out.println(i+1 + " " + prods.elementAt(i).getLHS() + " -> " + prods.elementAt(i).getRHS());
-		}
 		System.out.println();
 	}
 }// end class Grammar
