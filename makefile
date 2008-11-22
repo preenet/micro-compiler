@@ -5,7 +5,7 @@ JCFLAGS = -d bin -Xlint
 JAVAC = javac $(JFLAGS) $(JCFLAGS)
 JAVA = java $(JFLAGS)
 
-JAVASRC = $(shell ls src/uc/*.java) $(shell ls src/grammar/*.java)  $(shell ls src/parser/*.java) $(shell ls src/scanner/*.java) $(shell ls src/semantic/*.java)
+JAVASRC = $(shell ls src/uc/*.java) $(shell ls src/grammar/*.java)  $(shell ls src/parser/*.java) $(shell ls src/scanner/*.java) $(shell ls src/semantic/*.java) $(shell ls src/ll1grammar/*.java)
 CLASSES = $(JAVASRC:.java=.class)
 
 .SUFFIXES : .java .class
@@ -27,3 +27,4 @@ clean :
 	rm -f bin/parser/*.class
 	rm -f bin/scanner/*.class
 	rm -f bin/semantic/*.class
+	rm -f bin/ll1grammar/*.class
