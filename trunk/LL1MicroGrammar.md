@@ -3,9 +3,11 @@
 <stmt list>	->	<statement> <statement tail>
 <statement tail>	->	<stmt list>
 <statement tail>	->	lambda
-<statement>	->	<ident> AssignOp <expression> Semicolon
+<statement>	->	<ident> <assignment> <expression> Semicolon
 <statement> ->	ReadSym LPalen <id list> RPalen Semicolon
 <statement>	->	WriteSym LPalen <expr list> RPalen Semicolon
+<assignment> ->  AssignOp
+<assignment> ->  EqualOp
 <id list>	->	<ident> <id tail>
 <id tail>	->	Comma <id list>
 <id tail>	->	lambda
