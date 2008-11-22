@@ -37,7 +37,7 @@ public class Parser {
 	}
 
 	private void systemGoal() {
-		sr.addAction("Call systesroal()", ms.getRemainToken());
+		sr.addAction("Call systemGoal()", ms.getRemainToken());
 		prodNums.add(25);
 		program();
 		match(TokenType.EofSym);
@@ -369,6 +369,12 @@ public class Parser {
 		} 
 		else if (!ms.getTokens().elementAt(ms.index).getType().equals(t)) {
 			syntaxError(t);
+			if(TokenType.EofSym.equals(t) || TokenType.Semicolon.equals(t)) {
+				ms.index++;
+				while(!ms.nextToken().equals(t)) {
+					ms.index++;
+				}
+			}
 			return false;
 		} 
 		else
@@ -408,8 +414,10 @@ public class Parser {
 		validSet.unionTermset(followSet);
 		validSet.unionTermset(header);
 		
+		
 		while(!validSet.hasMember(new Symbol(ms.nextToken().toString()))) {
 			System.out.println("Skipped token: " + ms.nextToken());
+			ms.index++;
 		}
 	}
 	
