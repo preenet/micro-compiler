@@ -46,11 +46,12 @@ public class MicroCompiler {
 			usageAndExit();
 		}
 		
-		System.out.println("**************Scanning***************");
+		System.out.println("Scanning:");
 		ms = new Scanner(args[0]);
 		ms.scan();
-		System.out.println("\nDone scanning, Tokens after scanned:");
+		System.out.println("Tokens after scanned:");
 		ms.dumpTokens();
+		System.out.println("Retreive the first and follow set for the grammar:");
 		
 	    ga = new GrammarAnalyzer("LL1MicroGrammar.md");
 		lpg = new LL1PredictGenerator(ga.getGrammar());
@@ -59,11 +60,11 @@ public class MicroCompiler {
 		System.out.println("Follow Set:\n " + lpg.getFollowSet());
 
 
-		System.out.println("\n*******Recursive Descent Parsing****************");
+		System.out.println("\nRecursive Descent Parsing with Error Recovery:");
 		mp = new Parser(ms, lpg);
 		mp.parse();
 
-		System.out.println("\n********Demonstrate of the parser*************");
+		System.out.println("\nDemonstrate of the parser:");
 		mg = new Grammar(mp.getProductionNums(), ms.getStmtCount());
 		mg.showGrammar();
 		mp.dumpSteps();

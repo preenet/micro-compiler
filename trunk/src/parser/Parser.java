@@ -386,9 +386,10 @@ public class Parser {
 
 				ms.index++;
 				while(!ms.nextToken().equals(t)) {
+					System.out.println("Skipped: " + ms.nextToken());
 					ms.index++;
 				}
-				System.out.println("Found the EOFSYM or SEMICOLON");
+				System.out.println("Found: " + ms.nextToken());
 			}
 			return false;
 		} 
@@ -415,11 +416,12 @@ public class Parser {
 		System.out.println("Check Input:");
 		System.out.print("ValidSet : " + validSet);
 		System.out.print("FollowSet: " + followSet);
-		System.out.println("HeaderSet: " + header);
+		System.out.print("HeaderSet: " + header);
 		
 		TokenType t = ms.nextToken();
 		if(validSet.hasMember(new Symbol(t.toString()))) {
 			System.out.println("ValidSet has member : " + ms.nextToken());
+			System.out.println();
 			return;
 		}
 		else
@@ -428,12 +430,13 @@ public class Parser {
 		// union of the three sets.
 		validSet.unionTermset(followSet);
 		validSet.unionTermset(header);
-		
+		System.out.print("Union Set: " + validSet);
 		
 		while(!validSet.hasMember(new Symbol(ms.nextToken().toString()))) {
 			System.out.println("Skipped token: " + ms.nextToken());
 			ms.index++;
 		}
+		System.out.println();
 	}
 	
 	public Vector<Integer> getProductionNums() {
