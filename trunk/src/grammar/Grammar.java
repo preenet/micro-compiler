@@ -6,35 +6,6 @@
  * Grammar.java
  */
 
-/*
-	 This is the extended grammar for Micro language enhanced with Action Symbols. 
-	 From 14 original rules to 22 extended rules to be able to support the equal operator, 
-	 the exponential operator and proper demonstrate the parsing technique.
-	
-	 1. <program> —> #Start begin <stmt list> end
-	 2. <stmt list> —> <statement>
-	 3. <stmt list> —> <statement> <stmt list>
-	 4. <statement> —> <ident> <assignment> <expression> #Assign;
-	 5. <statement> —> read(<id list>) ;
-	 6. <statement> —> write(<expr list>) ;
-	 7. <id list> —> <ident> #ReadId
-	 8. <id list> -> <ident> #ReadId, <id list>
-	 9. <id list> -> null
-	 10. <expr list> —> <expression> #WriteExpr
-	 11. <expr list> —> <expression> #WriteExpr, <expr list>
-	 12. <assignment> —> AssignOp 
-	 13. <assignment> —> EqualOp
-	 14. <expression> —> <primary> 
-	 15. <expression> —> <primary>  <add op> <expression> #GenInfix
-	 16. <primary> —> (<expression>)
-	 17. <primary> —> <ident>
-	 18. <primary> —> IntLiteral #ProcessLiteral
-	 19. <ident> —> Id #ProcessId
-	 20. <add op> —> PlusOp #ProcessOp
-	 21. <add op> —> MinusOp #ProcessOp
-	 22. <system goal> —> <program> % #Finish
- */
-
 package grammar;
 import java.util.*;
 
