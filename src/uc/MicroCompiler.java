@@ -56,8 +56,8 @@ public class MicroCompiler {
 	    ga = new GrammarAnalyzer("LL1MicroGrammar.md");
 		lpg = new LL1PredictGenerator(ga.getGrammar());
 		
-		System.out.println("First Set:\n " + lpg.getFirstSet());
-		System.out.println("Follow Set:\n " + lpg.getFollowSet());
+		System.out.println("First Set:\n " + lpg.getFirstSets());
+		System.out.println("Follow Set:\n " + lpg.getFollowSets());
 
 
 		System.out.println("\nRecursive Descent Parsing with Error Recovery:");
