@@ -284,7 +284,7 @@ public class LL1PredictGenerator {
 	 * this routine is use for error recovery at recursive descent parser.
 	 * @return
 	 */
-	public Vector<TermSet> getFirstSet() {
+	public Vector<TermSet> getFirstSets() {
 		Vector<TermSet> retVal = new Vector<TermSet>();
 		for(int i = 0; i < firstSet.size(); i++)
 			if(!firstSet.elementAt(i).getSymbol().toString().endsWith("tail>") 
@@ -297,7 +297,7 @@ public class LL1PredictGenerator {
 	 * this routine is use for error recovery at recursive descent parser.
 	 * @return
 	 */
-	public Vector<TermSet> getFollowSet() {
+	public Vector<TermSet> getFollowSets() {
 		Vector<TermSet> retVal = new Vector<TermSet>();
 		for(int i = 0; i < followSet.size(); i++)
 			if(!followSet.elementAt(i).getSymbol().toString().endsWith("tail>")
@@ -314,10 +314,22 @@ public class LL1PredictGenerator {
 	public TermSet getValidSet(Symbol s) {
 		TermSet retVal = null;
 		for(int i = 0; i < firstSet.size(); i++)
-			if(!firstSet.elementAt(i).getSymbol().toString().endsWith("tail>")
-					&& firstSet.elementAt(i).getSymbol().getType().equals("n")
-					&& firstSet.elementAt(i).getSymbol().equals(s))
-				retVal = firstSet.elementAt(i);
+			// when lambda is not a member of First(A)
+			if(!firstSet.elementAt(i).hasMember(lambda)) {
+				if(!firstSet.elementAt(i).getSymbol().toString().endsWith("tail>")
+						&& firstSet.elementAt(i).getSymbol().getType().equals("n")
+						&& firstSet.elementAt(i).getSymbol().equals(s))
+					retVal = firstSet.elementAt(i);
+			}
+			// when lambda is a member of First(A) we return the union of ( First(A) and Follow(A) ) - lambda
+			else {
+				if(!firstSet.elementAt(i).getSymbol().toString().endsWith("tail>")
+						&& firstSet.elementAt(i).getSymbol().getType().equals("n")
+						&& firstSet.elementAt(i).getSymbol().equals(s)) {
+					retVal = firstSet.elementAt(i);
+					retVal.unionTermset(getFollowSet(s));
+				}
+			}
 		return retVal;
 	}
 	
