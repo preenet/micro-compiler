@@ -1,8 +1,6 @@
 /**
  * @author Pree Thiengburanathum
  * preenet@gmail.com
- * UC Assignment 10
- * due 11/19/08
  * ExternalFile.java
  */
 
