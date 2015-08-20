@@ -1,8 +1,6 @@
 /**
  * @author Pree Thiengburanathum
  * preenet@gmail.com
- * UC Assignment 8
- * due 11/03/08
  * Grammar.java
  */
 
