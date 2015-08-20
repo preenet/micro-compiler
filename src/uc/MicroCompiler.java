@@ -1,8 +1,6 @@
 /**
  * @author Pree Thiengburanathum
  * preenet@gmail.com
- * CSC5640 Universal Compiler
- * Assignment 11 Due 12/01/08
  * MicroCompiler.java
  *
  * Driver of the program
