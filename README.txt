@@ -1,7 +1,5 @@
 Pree Thiengburanathum
 preenet@gmail.com
-UC Assignment 11
-due 12/01/08
 README.txt
 -------------------------
 
@@ -299,24 +297,24 @@ Grammar rule applied:
 25, 1, 2, 4, 21, 15, 16, 19, 21, 22, 14, 17, 20, 24, 14, 16, 19, 21, 
 
 Parsing Derivation:
-<system goal>	25—> <program> EofSym
-	1—> BeginSym <stmt list> EndSym EofSym
-	2—> BeginSym <statement> EndSym EofSym
-	4—> BeginSym <ident> <assignment> <expression> SemiColon EndSym EofSym
-	21—> BeginSym Id <assignment> <expression> SemiColon EndSym EofSym
-	15—> BeginSym Id <assignment> <factor> <add op> <expression> SemiColon EndSym EofSym
-	16—> BeginSym Id <assignment> <primary> <add op> <expression> SemiColon EndSym EofSym
-	19—> BeginSym Id <assignment> <ident> <add op> <expression> SemiColon EndSym EofSym
-	21—> BeginSym Id <assignment> Id <add op> <expression> SemiColon EndSym EofSym
-	22—> BeginSym Id <assignment> Id PlusOp <expression> SemiColon EndSym EofSym
-	14—> BeginSym Id <assignment> Id PlusOp <factor> SemiColon EndSym EofSym
-	17—> BeginSym Id <assignment> Id PlusOp <primary> <mul op> <expression> SemiColon EndSym EofSym
-	20—> BeginSym Id <assignment> Id PlusOp IntLiteral <mul op> <expression> SemiColon EndSym EofSym
-	24—> BeginSym Id <assignment> Id PlusOp IntLiteral MultiOp <expression> SemiColon EndSym EofSym
-	14—> BeginSym Id <assignment> Id PlusOp IntLiteral MultiOp <factor> SemiColon EndSym EofSym
-	16—> BeginSym Id <assignment> Id PlusOp IntLiteral MultiOp <primary> SemiColon EndSym EofSym
-	19—> BeginSym Id <assignment> Id PlusOp IntLiteral MultiOp <ident> SemiColon EndSym EofSym
-	21—> BeginSym Id <assignment> Id PlusOp IntLiteral MultiOp Id SemiColon EndSym EofSym
+<system goal>	25Â—> <program> EofSym
+	1Â—> BeginSym <stmt list> EndSym EofSym
+	2Â—> BeginSym <statement> EndSym EofSym
+	4Â—> BeginSym <ident> <assignment> <expression> SemiColon EndSym EofSym
+	21Â—> BeginSym Id <assignment> <expression> SemiColon EndSym EofSym
+	15Â—> BeginSym Id <assignment> <factor> <add op> <expression> SemiColon EndSym EofSym
+	16Â—> BeginSym Id <assignment> <primary> <add op> <expression> SemiColon EndSym EofSym
+	19Â—> BeginSym Id <assignment> <ident> <add op> <expression> SemiColon EndSym EofSym
+	21Â—> BeginSym Id <assignment> Id <add op> <expression> SemiColon EndSym EofSym
+	22Â—> BeginSym Id <assignment> Id PlusOp <expression> SemiColon EndSym EofSym
+	14Â—> BeginSym Id <assignment> Id PlusOp <factor> SemiColon EndSym EofSym
+	17Â—> BeginSym Id <assignment> Id PlusOp <primary> <mul op> <expression> SemiColon EndSym EofSym
+	20Â—> BeginSym Id <assignment> Id PlusOp IntLiteral <mul op> <expression> SemiColon EndSym EofSym
+	24Â—> BeginSym Id <assignment> Id PlusOp IntLiteral MultiOp <expression> SemiColon EndSym EofSym
+	14Â—> BeginSym Id <assignment> Id PlusOp IntLiteral MultiOp <factor> SemiColon EndSym EofSym
+	16Â—> BeginSym Id <assignment> Id PlusOp IntLiteral MultiOp <primary> SemiColon EndSym EofSym
+	19Â—> BeginSym Id <assignment> Id PlusOp IntLiteral MultiOp <ident> SemiColon EndSym EofSym
+	21Â—> BeginSym Id <assignment> Id PlusOp IntLiteral MultiOp Id SemiColon EndSym EofSym
 
 Parsing Steps Trace:
 Step Parser Action			Remaining Input				Generated Code
