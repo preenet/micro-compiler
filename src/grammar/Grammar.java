@@ -1,8 +1,7 @@
 /**
  * @author Pree Thiengburanathum
  * preenet@gmail.com
- * CSC5640 Universal Compiler
- * Assignment 11 Due 12/01/08  
+ * Universal Compiler
  * Grammar.java
  */
 
