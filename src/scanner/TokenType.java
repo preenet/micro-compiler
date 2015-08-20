@@ -2,8 +2,7 @@ package scanner;
 /**
  * @author Pree Thiengburanathum
  * preenet@gmail.com
- * CSC5640 Universal Compiler
- * Assignment 11 
+ * Universal Compiler
  * TokenType.java
  */
 
