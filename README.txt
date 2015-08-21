@@ -2,7 +2,7 @@ Pree Thiengburanathum
 preenet@gmail.com
 README.txt
 -------------------------
-
+Micro Compiler with Error Recovery employing routines and implementation as a universal compiler with LL(1) Parser Driver and Parser-controlled Semantic Stack. The symbol table should be implemented as a single hash table with the common string space. The output of this new Compiler must be a generated code in the form of tuples. In the process of compilation the Compiler prints out compiler actions in the form considered in class, i.e., the remaining input, current state of the parse and semantic stacks, the generated code. Also, it should output the current state of the symbol table.
 --------------------------------
 Directory and File descriptions:
 --------------------------------
